@@ -1,0 +1,23 @@
+name: "Genezio GitHub Action"
+description: "GitHub Action to deploy your code using genezio"
+author: "genezio"
+
+inputs:
+  genezio-version:
+    description: "The genezio version to download (if necessary) and use."
+    required: false
+  token:
+    description: "Your genezio deployment login token"
+    required: false
+
+outputs:
+  genezio-version:
+    description: 'The installed genezio version. Useful when given a version range as input.'
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'upload-cloud'
+  color: 'purple'

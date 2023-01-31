@@ -1,0 +1,24 @@
+{
+  "name": "geneziogithub",
+  "version": "1.0.0",
+  "description": "GitHub Action to deploy your code using genezio",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "package": "ncc build --source-map --license licenses.txt",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andreia Ocanoaia <andreia.ocanoaia@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "~18.11.18",
+    "genezio": "~0.2.0"
+  },
+  "dependencies": {
+    "@actions/core": "~1.10.0",
+    "@actions/exec": "~1.1.1",
+    "@actions/github": "~5.1.1",
+    "ncc": "~0.3.6",
+    "typescript": "~4.9.4"
+  }
+}
