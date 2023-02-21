@@ -6,13 +6,14 @@ inputs:
   genezio-version:
     description: "The genezio version to download (if necessary) and use."
     required: false
+    default: "latest"
   token:
     description: "Your genezio deployment login token"
-    required: false
+    required: true
 
 outputs:
   genezio-version:
-    description: 'The installed genezio version. Useful when given a version range as input.'
+    description: "The installed genezio version."
 
 runs:
   using: 'node16'
