@@ -52,7 +52,7 @@ Check the snippet below to automate it using this action:
 
 ```yaml
 deploy-frontend:
-  needs: deploy
+  needs: deploy-backend
   runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v3
@@ -110,7 +110,7 @@ jobs:
           path: ./client/sdk
 
   deploy-frontend:
-    needs: deploy
+    needs: deploy-backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
