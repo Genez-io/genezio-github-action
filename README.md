@@ -1,5 +1,7 @@
 # genezio-github-action
 
+[![Validate 'genezio-github-action'](https://github.com/Genez-io/genezio-github-action/actions/workflows/test.yml/badge.svg)](https://github.com/Genez-io/genezio-github-action/actions/workflows/test.yml)
+
 This action sets up a `genezio` environment for using it in actions.
 
 ## Usage
