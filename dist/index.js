@@ -4004,7 +4004,6 @@ function run() {
                 version = "latest";
             }
             const token = core.getInput("token", { required: false });
-            core.setSecret(token);
             // Check if npm is installed
             exec.exec("npm -v").catch((error) => {
                 console.log("Checking if npm is installed failed with error: ", error.message);
@@ -4025,6 +4024,7 @@ function run() {
             });
             // Login using genezio CLI
             if (token != "" && token != null) {
+                core.setSecret(token);
                 yield exec.exec("genezio", ["login", token]);
             }
             else {

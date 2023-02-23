@@ -10,7 +10,6 @@ async function run(): Promise<void> {
             version = "latest"
         }
         const token: string  = core.getInput("token", { required: false });
-        core.setSecret(token);
         
         // Check if npm is installed
         exec.exec("npm -v").catch((error: any) => {
@@ -35,6 +34,7 @@ async function run(): Promise<void> {
         
         // Login using genezio CLI
         if (token != "" && token != null) {
+            core.setSecret(token);
             await exec.exec("genezio", ["login", token]);
         } else {
             console.log("Logging in failed with error:", "Token is not provided")
