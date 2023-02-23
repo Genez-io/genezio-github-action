@@ -3999,29 +3999,43 @@ const process_1 = __nccwpck_require__(282);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const version = core.getInput("genezio-version", { required: false });
+            let version = core.getInput("genezio-version", { required: false });
+            if (version != "" || version != null) {
+                version = "latest";
+            }
             const token = core.getInput("token", { required: false });
             core.setSecret(token);
             // Check if npm is installed
             exec.exec("npm -v").catch((error) => {
-                console.log("Error: ", error.message);
+                console.log("Checking if npm is installed failed with error: ", error.message);
                 (0, process_1.exit)(1);
             });
             // Install genezio CLI
-            yield exec.exec("npm install -g genezio").catch((error) => {
-                console.log("Error: ", error.message);
+            yield exec.exec("npm install -g genezio@" + version).catch((error) => {
+                console.log("Installing genezio using npm failed with error: ", error.message);
                 (0, process_1.exit)(1);
             });
+            // Set genezio version as output to be used to verify the installation
+            yield exec.exec("genezio", ["--version"]).catch((error) => {
+                console.log("Checking if genezio is installed failed with error: ", error.message);
+                (0, process_1.exit)(1);
+            }).then((version) => {
+                console.log("genezio version: ", version);
+                core.setOutput("genezio-version", version);
+            });
             // Login using genezio CLI
-            if (token != "" || token != null) {
+            if (token != "" && token != null) {
                 yield exec.exec("genezio", ["login", token]);
+            }
+            else {
+                console.log("Logging in failed with error:", "Token is not provided");
+                (0, process_1.exit)(1);
             }
             // Check if genezio is logged in
             yield exec.exec("genezio", ["account"]).catch((error) => {
-                console.log("Error: ", error.message);
+                console.log("Displaying user information failed with error: ", error.message);
                 (0, process_1.exit)(1);
             });
-            core.setOutput("genezio-version", version);
         }
         catch (error) {
             core.setFailed(error.message);

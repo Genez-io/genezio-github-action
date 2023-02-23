@@ -26,7 +26,5 @@ jobs:
           node-version: 16
       - name: Setup genezio
         uses: ./
-        with:
-          token: ${{ secrets.GENEZIO_TOKEN }}
       - name: Verify genezio installation
         run: genezio --version
