@@ -9,7 +9,8 @@ inputs:
     default: "latest"
   token:
     description: "Your genezio deployment login token"
-    required: true
+    required: false
+    default: ""
 
 outputs:
   genezio-version:
