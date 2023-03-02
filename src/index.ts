@@ -5,8 +5,11 @@ import { exit } from "process";
 
 async function run(): Promise<void> {
     try {
-        const version: string = core.getInput("genezio-version", { required: false });
-        const token: string  = core.getInput("token", {required: true});
+        let version: string = core.getInput("genezio-version", { required: false });
+        if (version == "" || version == null) {
+            version = "latest"
+        }
+        const token: string  = core.getInput("token", { required: false });
         core.setSecret(token);
 
         // Check if npm is installed
@@ -28,22 +31,15 @@ async function run(): Promise<void> {
         }).then((version: any) => {
             console.log("genezio version: ", version)
             core.setOutput("genezio-version", version);
-            });
-
-        // Login using genezio CLI
-        if (token != "" || token != null) {
-            await exec.exec("genezio", ["login", token]);
-        } else {
-            console.log("Logging in failed with error:", "Token is not provided")
-            exit(1)
-        }
-
-        // Check if genezio is logged in
-        await exec.exec("genezio", ["account"]).catch((error: any) => {
-            console.log("Displaying user information failed with error: ", error.message)
-            exit(1)
         });
 
+        // Login using genezio CLI
+        if (token == "" || token == null) {
+            console.log("Please provide a valid genezio token to login.")
+        } else {
+            await exec.exec("genezio", ["login", token]);
+            console.log("Succesfully logged in.")
+        }
     } catch (error : any) {
         core.setFailed(error.message)
     };

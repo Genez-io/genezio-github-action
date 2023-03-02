@@ -11,6 +11,7 @@ on:
     - '**.md'
   schedule:
     - cron: 0 0 * * 1
+  workflow_dispatch:
 
 jobs:
   stable:
@@ -26,7 +27,5 @@ jobs:
           node-version: 16
       - name: Setup genezio
         uses: ./
-        with:
-          token: ${{ secrets.GENEZIO_TOKEN }}
       - name: Verify genezio installation
         run: genezio --version
