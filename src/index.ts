@@ -1,6 +1,5 @@
 import * as core from "@actions/core";
-import { context } from "@actions/github";
-import * as exec from "@actions/exec"; 
+import * as exec from "@actions/exec";
 import { exit } from "process";
 
 async function run(): Promise<void> {
