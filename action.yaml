@@ -6,7 +6,7 @@ inputs:
   genezio-version:
     description: "The genezio version to download (if necessary) and use."
     required: false
-    default: "latest"
+    default: ""
   token:
     description: "Your genezio deployment login token"
     required: false
