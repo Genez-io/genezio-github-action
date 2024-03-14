@@ -6,7 +6,7 @@ async function run(): Promise<void> {
     try {
         let version: string = core.getInput("genezio-version", { required: false });
         if (version == "" || version == null) {
-            version = "latest"
+            version = "v0.8.0"
         }
         const token: string  = core.getInput("token", { required: false });
         core.setSecret(token);
@@ -37,7 +37,7 @@ async function run(): Promise<void> {
             console.log("Please provide a valid genezio token to login.")
         } else {
             await exec.exec("genezio", ["login", token]);
-            console.log("Succesfully logged in.")
+            console.log("Successfully logged in.")
         }
     } catch (error : any) {
         core.setFailed(error.message)
