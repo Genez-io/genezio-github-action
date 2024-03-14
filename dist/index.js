@@ -3980,7 +3980,7 @@ function run() {
         try {
             let version = core.getInput("genezio-version", { required: false });
             if (version == "" || version == null) {
-                version = "v0.8.0";
+                version = "v1";
             }
             const token = core.getInput("token", { required: false });
             core.setSecret(token);
