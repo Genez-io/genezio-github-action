@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - uses: Genez-io/genezio-github-action@v1
+      - uses: Genez-io/genezio-github-action@v2
         with:
           token: ${{ secrets.GENEZIO_TOKEN }}
       - name: Deploy backend
