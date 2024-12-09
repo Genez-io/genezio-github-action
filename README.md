@@ -30,64 +30,26 @@ jobs:
   deploy-backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - uses: Genez-io/genezio-github-action@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - uses: Genez-io/genezio-github-action@v3
         with:
           token: ${{ secrets.GENEZIO_TOKEN }}
       - name: Deploy backend
-        working-directory: ./server
+        working-directory: ./
         run: genezio deploy
 ```
 
-You can test or check logs for the deployed project at https://app.genez.io/projects.
-
-### Frontend and backend deployment in different jobs
-
-If you want to deploy the frontend and backend of your project in different jobs, you can use `genezio deploy --backend` and `genezio deploy --frontend` commands.
-
-For the frontend deployment, the genezio-generated SDK should be uploaded as an artifact:
-
-```yaml
-  # Use this trick to upload the generated SDK as an artifact
-  # It will be used to deploy the frontend
-  - uses: actions/upload-artifact@v3
-    with:
-      name: genezio-generated-sdk
-      path: ./client/src/sdk
-```
+You can test or check logs for the deployed project at https://app.genez.io.
 
 ## Documentation
 
 To find more details on how to use `genezio`, check out the official [documentation](https://genez.io/docs):
 
-- [Getting started](https://docs.genez.io/genezio-documentation/getting-started)
+- [Getting started](https://genezio.com/docs/getting-started/)
 - [Integrations](https://docs.genez.io/genezio-documentation/integrations)
-- [Environment variables](https://docs.genez.io/genezio-documentation/set-envinronment-variables)
 
 If you cannot find what you are looking for in the docs, don't hesitate to drop us a [GitHub issue](https://github.com/Genez-io/genezio/issues) or [start a discussion on Discord](https://discord.gg/uc9H5YKjXv).
-
-## Troubleshooting
-
-### Warnings on `npm run build` are treated as errors:
-
-The following error may occur when running `npm run build` to build the frontend source code:
-```
-Treating warnings as errors because process.env.CI = true.
-Most CI servers set it automatically.
-
-Failed to compile.
-```
-
-The solution is to set CI to false in `package.json` or in your workflow:
-
-```yaml
-- name: Deploy backend
-  working-directory: ./server
-  run: genezio deploy
-  env:
-    CI: false
-```
 
 ## License
 
